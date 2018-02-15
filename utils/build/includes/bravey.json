@@ -10,6 +10,7 @@
 	"src/entityrecognizers/NumberEntityRecognizer.js",
 	"src/entityrecognizers/RegexEntityRecognizer.js",
 	"src/entityrecognizers/EMailEntityRecognizer.js",
+	"src/entityrecognizers/FunctionEntityRecognizer.js",
 	"src/classifiers/DocumentClassifier.js",
 	"src/languages/it.js",
 	"src/languages/en.js",

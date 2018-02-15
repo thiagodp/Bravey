@@ -436,6 +436,57 @@ QUnit.test("EMailEntityRecognizer", function(assert) {
   }], "Consecutive entities are matched");
 });
 
+// FunctionEntityRecognizer
+
+QUnit.test("FunctionEntityRecognizer", function(assert) {
+
+  var quotedStringWithEscapedQuotes = function(str) {
+    var detected = [];
+    var regex = /"(?:[^"\\]|\\.)*"/g;
+    var m;
+    while ((m = regex.exec(str)) !== null) {
+      // This is necessary to avoid infinite loops with zero-width matches
+      if (m.index === regex.lastIndex) {
+        regex.lastIndex++;
+      }
+      // Adds detected matches
+      m.forEach(function(match, groupIndex) {
+        detected.push({
+          value: match,
+          index: m.index
+        });
+      });
+    }
+    return detected;
+  };
+
+  var reg = new Bravey.FunctionEntityRecognizer("test", quotedStringWithEscapedQuotes);
+  assert.deepEqual(
+    reg.getEntities(' foo "one" and "two" or "three is \\\"3\\\"" '), [{
+        "entity": "test",
+        "position": 5,
+        "priority": 0,
+        "string": "\"one\"",
+        "value": "\"one\""
+      },
+      {
+        "entity": "test",
+        "position": 15,
+        "priority": 0,
+        "string": "\"two\"",
+        "value": "\"two\""
+      },
+      {
+        "entity": "test",
+        "position": 24,
+        "priority": 0,
+        "string": "\"three is \\\"3\\\"\"",
+        "value": "\"three is \\\"3\\\"\""
+      }
+    ]
+  );
+});
+
 // StringEntityRecognizer
 
 QUnit.test("StringEntityRecognizer", function(assert) {
