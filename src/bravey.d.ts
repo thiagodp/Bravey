@@ -133,6 +133,7 @@ export const NumberEntityRecognizer: NumberEntityRecognizerConstructor;
 export const FreeTextEntityRecognizer: FreeTextEntityRecognizerConstructor;
 export const TimeEntityRecognizer: TimeEntityRecognizerConstructor;
 export const TimePeriodEntityRecognizer: TimePeriodEntityRecognizerConstructor;
+export const FunctionEntityRecognizer: FunctionEntityRecognizerConstructor;
 
 // languages 
 
